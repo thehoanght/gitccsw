@@ -69,6 +69,7 @@
             "composer update --no-scripts",
             "composer dump-autoload -o",
             "composer update",
+
             "@php artisan key:generate --ansi"
         ]
     }
