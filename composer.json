@@ -66,10 +66,6 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "composer update --no-scripts",
-            "composer dump-autoload -o",
-            "composer update",
-
             "@php artisan key:generate --ansi"
         ]
     }
