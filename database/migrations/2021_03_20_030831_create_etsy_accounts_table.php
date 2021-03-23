@@ -20,12 +20,15 @@ class CreateEtsyAccountsTable extends Migration
             $table->string('credit_card')->nullable();
             $table->string('credit_card_type')->nullable();
             $table->text('address')->nullable();
-            $table->string('purchased')->nullable();            
+            $table->string('purchased')->nullable();
             $table->string('purechased_at')->nullable();
             $table->string('shop')->nullable();
-            $table->string('shop_url')->nullable();            
-            $table->string('status')->nullable();            
-            $table->text('note')->nullable();           
+            $table->string('facebook')->nullable();
+            $table->string('google')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('shop_url')->nullable();
+            $table->string('status')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

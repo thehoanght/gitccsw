@@ -27,7 +27,10 @@ class EtsyAccountController extends Controller
             'credit_card_type' => $request->credit_card_type,
             'address' => $request->address,
             'purchased' => $request->purchased,
-            'purechased_at' => $request->purechased_at
+            'purechased_at' => $request->purchased_at,
+            'facebook'  => $request->facebook,
+            'google'  => $request->google,
+            'twitter'  => $request->twitter
         ]);
     }
 }
