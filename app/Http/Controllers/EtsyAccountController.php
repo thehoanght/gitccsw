@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\EtsyAccount;
 use Illuminate\Http\Request;
 
@@ -18,19 +19,25 @@ class EtsyAccountController extends Controller
     }
     public function putAccount(Request $request)
     {
-        $account = $request->email;
-        $password = $request->password;
-        EtsyAccount::insert([
-            'email_old' => $request->email,
-            'etsy_password_old' => $request->password,
-            'credit_card' => $request->credit_card,
-            'credit_card_type' => $request->credit_card_type,
-            'address' => $request->address,
-            'purchased' => $request->purchased,
-            'purechased_at' => $request->purchased_at,
-            'facebook'  => $request->facebook,
-            'google'  => $request->google,
-            'twitter'  => $request->twitter
-        ]);
+        #check exists
+        if (EtsyAccount::where('email_old', $request->email)->count() < 1) {
+            $account = $request->email;
+            $password = $request->password;
+            EtsyAccount::insert([
+                'email_old' => $request->email,
+                'etsy_password_old' => $request->password,
+                'credit_card' => $request->credit_card,
+                'credit_card_type' => $request->credit_card_type,
+                'address' => $request->address,
+                'purchased' => $request->purchased,
+                'purechased_at' => $request->purchased_at,
+                'facebook'  => $request->facebook,
+                'google'  => $request->google,
+                'twitter'  => $request->twitter
+            ]);
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
