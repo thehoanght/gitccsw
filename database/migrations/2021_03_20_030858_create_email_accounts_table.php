@@ -22,7 +22,7 @@ class CreateEmailAccountsTable extends Migration
             $table->string("email_recover")->nullable();
             $table->string("email_recover_password")->nullable();
             $table->text("note")->nullable();
-            $table->timestamp("email_created_at")->nullable();
+            $table->string("email_created_at")->nullable();
             $table->timestamps();
         });
     }
