@@ -125,7 +125,7 @@ class MenusTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    { 
+    {
         /* Get roles */
         $this->adminRole = Role::where('name' , '=' , 'admin' )->first();
         $this->userRole = Role::where('name', '=', 'user' )->first();
@@ -135,6 +135,7 @@ class MenusTableSeeder extends Seeder
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
         $this->insertLink('guest,user,admin', 'Dashboard', '/', 'cil-speedometer');
+        #hoang add
         $this->beginDropdown('admin', 'Settings', 'cil-calculator');
             $this->insertLink('admin', 'Notes',                   '/notes');
             $this->insertLink('admin', 'Users',                   '/users');
@@ -145,6 +146,19 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('admin', 'BREAD',                   '/bread');
             $this->insertLink('admin', 'Email',                   '/mail');
         $this->endDropdown();
+        $this->insertTitle('user,admin', 'Manager');
+        $this->beginDropdown('admin', 'Etsy', 'cil-cc');
+            $this->insertLink('admin', 'Report',                   '/etsy');
+            $this->insertLink('admin', 'Export',                   '/etsy/export');
+        $this->endDropdown();
+
+        $this->beginDropdown('admin', 'Email', 'cil-envelope-open');
+            $this->insertLink('admin', 'Report',                   '/email');
+            $this->insertLink('admin', 'Import',                   '/email/import');
+        $this->endDropdown();
+
+        #end hoang add
+
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');
         $this->insertTitle('user,admin', 'Theme');

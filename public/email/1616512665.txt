@@ -1,0 +1,6 @@
+ID,Pass Etsy,pass hotmail,mail recovery,country,Zip code,Purchared,date oder,date creat,CreditCard
+justycexwr@hotmail.com,jen8487,tSJ7OkRzXi,lilydodridgenz@mailnesia.com,US,MN 55435,TRUE,"Dec 3, 2012","December 3, 2012",FALSE
+shyanjtj@hotmail.com,madmatt,nIQ7XzohY9,kermitshubinj1@mailnesia.com,US,,TRUE,"Nov 23, 2010","November 23, 2010",FALSE
+rishabetp@hotmail.com,gianna22,DiIgaf5SHrc,charleenbrodersen5r@mailnesia.com,US,DE 19973-8606,TRUE,"Feb 11, 2021","December 18, 2015",FALSE
+curtisx9u@hotmail.com,Maggie#27,YcKdQBPRH7N,carynsassowk@mailnesia.com,US,PA 15101,TRUE,"May 18, 2015","September 12, 2014",FALSE
+einaxh@hotmail.com,rosanell,n2CysoHB9gD,shanaeauvilep@mailnesia.com,US,CA 94306-2516,TRUE,"28 Jan, 2020","08 December, 2018",FALSE

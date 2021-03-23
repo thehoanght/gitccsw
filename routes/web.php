@@ -20,8 +20,11 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/charts', function () {     return view('dashboard.charts'); });
         #david_dao add
         Route::get('/etsy', function () {     return view('dashboard.etsy'); });
-        Route::get('/email', function () {     return view('dashboard.email'); });
+        Route::get('/etsy/export', function () {     return view('dashboard.etsy'); });
 
+        Route::get('/email', function () {     return view('dashboard.emailraw'); });
+        Route::get('/email/import', function () {     return view('dashboard.emailraw.import'); });
+        Route::post('/email/import', 'EmailAccountController@importEmailAccount')->name('email-import');
         #end david_dao
         Route::get('/widgets', function () {    return view('dashboard.widgets'); });
         Route::get('/404', function () {        return view('dashboard.404'); });

@@ -69,10 +69,49 @@ class EmailAccountController extends Controller
         }
     }
 
+    public function importEmailAccount(Request $request)
+    {;
+        //Kiểm tra file
+        if ($request->hasFile('emailfile')) {
+            $file = $request->emailfile;
+            //  \r\n
+            $array = preg_split('/[\n\r]+/', $file->get());
+            $count = 0;
+            foreach ($array as $accinfo) {
+                try {
+                    $acc = explode(',', $accinfo);
+                    $email_ = $acc[0];
+                    $pass_ = $acc[1];
+                    $recover_ = $acc[2];
+
+                    #check exists
+                    if (EmailAccount::where('email', $email_)->count() < 1) {
+                        try {
+                            EmailAccount::insert([
+                                'email' => $email_,
+                                'email_type' => 'Hotmail',
+                                'status' => 1,
+                                'password' => $pass_,
+                                'email_recover' => $recover_
+                            ]);
+                            $count++;
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                } catch (\Throwable $th) {
+                }
+            }
+            return back()
+                ->with('success', 'Đã upload ' . $count . ' email mới.');
+        } else {
+            return back()
+                ->with('error', 'You have error when upload.');
+        }
+    }
     public function putEmailAccount(Request $request)
     {
         #check exists
-        if (EmailAccount::where('email', $request->email)->count()<1) {
+        if (EmailAccount::where('email', $request->email)->count() < 1) {
             try {
                 EmailAccount::insert([
                     'email' => $request->email,
@@ -85,7 +124,7 @@ class EmailAccountController extends Controller
             } catch (\Throwable $th) {
                 return 0;
             }
-        }else {
+        } else {
             return 0;
         }
     }
