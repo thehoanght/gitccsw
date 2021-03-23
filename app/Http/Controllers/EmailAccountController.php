@@ -20,8 +20,15 @@ class EmailAccountController extends Controller
     }
     public function getNewEmail(Request $request)
     {
-        EmailAccount::select('email','email_type','password','email_recover','email_recover_password')->update(['status'=>'geting']);
-        return response()->json(EmailAccount::select('email','email_type','password','email_recover','email_recover_password')->where('status','1')->first());
+        $email = EmailAccount::where('status','1')->first();
+        try {
+            $email->status = "getting";
+            $email->save();
+            return response()->json($email);
+        } catch (\Throwable $th) {
+            return 0;
+        }
+
     }
     public function confirmChangedEmail(Request $request)
     {
