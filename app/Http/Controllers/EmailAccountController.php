@@ -36,6 +36,14 @@ class EmailAccountController extends Controller
             return 0;
         }
     }
+
+    public function getEmailAvailable(Request $request)
+    {
+        $dt = EmailAccount::where('status','1')->get();
+        foreach ($dt as $d) {
+            echo $d->email.','.$d->password.','.$d->email_recover.'<br>';
+        }
+    }
     public function getNewEmailConfirm(Request $request)
     {
         try {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangeEmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailAccountController;
@@ -34,3 +35,8 @@ Route::get('/get_new_email_confirm',[EmailAccountController::class,'getNewEmailC
 Route::post('/confirm_changed_email',[EmailAccountController::class,'confirmChangedEmail']);
 //confirm change email when click confirm change email on Mailbox
 Route::post('/confirm_changed_email_complete',[EmailAccountController::class,'confirmChangedEmailComplete']);
+
+Route::get('/change_email/getresult',[ChangeEmailController::class,'getResult']);
+
+
+Route::get('/email/available',[EmailAccountController::class,'getEmailAvailable']);
