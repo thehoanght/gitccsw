@@ -28,6 +28,8 @@ Route::post('/put_etsy_account',[EtsyAccountController::class,'putAccount']);
 Route::post('/put_email_account',[EmailAccountController::class,'putEmailAccount']);
 //get new email for change
 Route::post('/get_new_email',[EmailAccountController::class,'getNewEmail']);
+//get new email for change
+Route::get('/get_new_email_confirm',[EmailAccountController::class,'getNewEmailConfirm']);
 //confirm change email when send request change email on etsy
 Route::post('/confirm_changed_email',[EmailAccountController::class,'confirmChangedEmail']);
 //confirm change email when click confirm change email on Mailbox

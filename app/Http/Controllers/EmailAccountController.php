@@ -36,6 +36,22 @@ class EmailAccountController extends Controller
             return 0;
         }
     }
+    public function getNewEmailConfirm(Request $request)
+    {
+        try {
+            $data = ChangeEmailAccount::where('status', 'pending')->first();
+            $email_new_id = $data->email_new_id;
+            $email_old_id = $data->email_old_id;
+            $email = EmailAccount::where('id', $email_new_id)->first();
+            $etsy = EtsyAccount::where('id', $email_old_id)->first();
+
+            $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old);
+            return response()->json($res);
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
+
     public function confirmChangedEmail(Request $request)
     {
         try {
@@ -52,6 +68,9 @@ class EmailAccountController extends Controller
                 ->update([
                     'status'    =>  0
                 ]);
+
+            EtsyAccount::where('email_old', $request->email_old)->update(['status' => '0']);
+
             return 1;
         } catch (\Throwable $th) {
             return 0;
