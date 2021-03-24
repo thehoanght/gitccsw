@@ -19,9 +19,11 @@ class CreateEtsyAccountsTable extends Migration
             $table->string('etsy_password_old');
             $table->string('credit_card')->nullable();
             $table->string('credit_card_type')->nullable();
+            $table->string('date_created_account')->nullable();
             $table->text('address')->nullable();
             $table->string('purchased')->nullable();
-            $table->string('purechased_at')->nullable();
+            $table->string('purchased_at')->nullable();
+            $table->string('country')->nullable();
             $table->string('shop')->nullable();
             $table->string('facebook')->nullable();
             $table->string('google')->nullable();

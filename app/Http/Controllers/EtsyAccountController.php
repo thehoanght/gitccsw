@@ -26,14 +26,19 @@ class EtsyAccountController extends Controller
             EtsyAccount::insert([
                 'email_old' => $request->email,
                 'etsy_password_old' => $request->password,
-                'credit_card' => $request->credit_card,
-                'credit_card_type' => $request->credit_card_type,
-                'address' => $request->address,
-                'purchased' => $request->purchased,
-                'purechased_at' => $request->purchased_at,
+                'date_created_account' => $request->date_created_account,
+                'credit_card' => $request->credit_card != '<CardType>' ? $request->credit_card : null,
+                'credit_card_type' => $request->credit_card_type != '<CardType>' ? $request->credit_card_type : null,
+                'address' => $request->address != '<Zipcode>' ? $request->address : null,
+                'purchased' => $request->purchased != '<PURCHASED2>' ? $request->purchased : null,
+                'purchased_at' => $request->purchased_at != '<DatePurchased>' ? $request->purchased_at : null,
+                'country' => $request->country != '<CountryName>' ? $request->country : null,
+                'shop'  => $request->shop_url != '<SHOPNAME>' ? $request->country : null,
+                'shop_url'  => $request->shop_url != '<SHOPNAME>' ? $request->country : null,
                 'facebook'  => $request->facebook,
                 'google'  => $request->google,
-                'twitter'  => $request->twitter
+                'twitter'  => $request->twitter,
+                'created_at' => now()
             ]);
             return 1;
         } else {
