@@ -39,9 +39,9 @@ class EmailAccountController extends Controller
 
     public function getEmailAvailable(Request $request)
     {
-        $dt = EmailAccount::where('status','1')->get();
+        $dt = EmailAccount::where('status', '1')->get();
         foreach ($dt as $d) {
-            echo $d->email.','.$d->password.','.$d->email_recover.'<br>';
+            echo $d->email . ',' . $d->password . ',' . $d->email_recover . '<br>';
         }
     }
     public function getNewEmailConfirm(Request $request)
@@ -87,10 +87,16 @@ class EmailAccountController extends Controller
     public function confirmChangedEmailComplete(Request $request)
     {
         try {
+            $status = $request->status;
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;
-            ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  'done']);
-            return 1;
+            if ($status . equalTo("failemail")) {
+                ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  $status]);
+                return 0;
+            } else {
+                ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  'done']);
+                return 1;
+            }
         } catch (\Throwable $th) {
             return 0;
         }
