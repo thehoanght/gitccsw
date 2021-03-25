@@ -6,6 +6,7 @@ use App\Models\EmailAccount;
 use App\Models\EtsyAccount;
 use App\Models\ChangeEmailAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmailAccountController extends Controller
 {
@@ -46,8 +47,15 @@ class EmailAccountController extends Controller
     }
     public function getNewEmailConfirm(Request $request)
     {
+        $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
+            $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
+        })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
         try {
-            $data = ChangeEmailAccount::where('status', 'pending')->first();
+            $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
+                $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
+            })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
+
+            //$data = ChangeEmailAccount::join('etsy_accounts', 'change_email_accounts.email_old_id', '=', 'etsy_accounts.id')->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
             $email_new_id = $data->email_new_id;
             $email_old_id = $data->email_old_id;
             $email = EmailAccount::where('id', $email_new_id)->first();
