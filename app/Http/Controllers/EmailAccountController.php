@@ -90,7 +90,7 @@ class EmailAccountController extends Controller
             $status = $request->status;
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;
-            if ($status . equalTo("failemail")) {
+            if ($status == "failemail") {
                 ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  $status]);
                 return 0;
             } else {
