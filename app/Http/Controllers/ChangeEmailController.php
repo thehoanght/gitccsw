@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\EmailAccount;
 use App\Models\EtsyAccount;
 use App\Models\ChangeEmailAccount;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 class ChangeEmailController extends Controller
 {
     /**
@@ -25,7 +25,7 @@ class ChangeEmailController extends Controller
         foreach ($datas as $data) {
             $et = EtsyAccount::where('id', $data->email_old_id)->first();
             $em = EmailAccount::where('id', $data->email_new_id)->first();
-            $created_at = str_replace(',',' ',$et->created_at);
+            $created_at = str_replace(',',' ',Carbon::parse($et->created_at)->format('d M Y'));
             $purechased_at = str_replace(',',' ',$et->purechased_at );
             $date_created_account = str_replace(',',' ',$et->date_created_account);
             echo $em->email . ',' . $et->etsy_password_old . ',' . $em->password . ',' . $em->email_recover . ',' . $et->country . ',' . $et->address . ',' . $et->purchased . ',' . $purechased_at . ',' . $date_created_account . ',' . $et->credit_card . ',' . $created_at . ',' . $data->status;
