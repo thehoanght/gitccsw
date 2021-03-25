@@ -23,9 +23,10 @@ class ChangeEmailController extends Controller
     {
         $datas = ChangeEmailAccount::get();
         foreach ($datas as $data) {
-            $et = EtsyAccount::where('id',$data->email_old_id)->first();
-            $em = EmailAccount::where('id',$data->email_new_id)->first();
-            echo $em->email.','.$et->etsy_password_old.','.$em->password.','.$em->email_recover.','.$et->country.','.$et->address.','.$et->purchased.','.$et->purechased_at.','.$et->date_created_account.','.$et->credit_card.','.$data->created_at.','.$data->status;
+            $et = EtsyAccount::where('id', $data->email_old_id)->first();
+            $em = EmailAccount::where('id', $data->email_new_id)->first();
+            $created_at = date('d', $data->created_at) . ' ' . date('M', $data->created_at) . ' ' . date('Y', $data->created_at);
+            echo $em->email . ',' . $et->etsy_password_old . ',' . $em->password . ',' . $em->email_recover . ',' . $et->country . ',' . $et->address . ',' . $et->purchased . ',' . $et->purechased_at . ',' . $et->date_created_account . ',' . $et->credit_card . ',' . $created_at . ',' . $data->status;
             echo "<br>";
             //$email_new_id = $data->email_new_id;
         }
