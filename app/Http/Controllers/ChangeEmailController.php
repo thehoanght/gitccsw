@@ -25,7 +25,7 @@ class ChangeEmailController extends Controller
         foreach ($datas as $data) {
             $et = EtsyAccount::where('id',$data->email_old_id)->first();
             $em = EmailAccount::where('id',$data->email_new_id)->first();
-            echo $em->email.','.$et->etsy_password_old.','.$em->password.','.$em->email_recover.','.'country'.','.$et->address.','.$et->purchased.','.$et->purechased_at.','.'date_created'.','.$et->credit_card.','.$data->status;
+            echo $em->email.','.$et->etsy_password_old.','.$em->password.','.$em->email_recover.','.$et->country.','.$et->address.','.$et->purchased.','.$et->purechased_at.','.$et->date_created_account.','.$et->credit_card.','.$data->created_at.','.$data->status;
             echo "<br>";
             //$email_new_id = $data->email_new_id;
         }
