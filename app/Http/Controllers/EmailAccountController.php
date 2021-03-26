@@ -61,7 +61,7 @@ class EmailAccountController extends Controller
             $email = EmailAccount::where('id', $email_new_id)->first();
             $etsy = EtsyAccount::where('id', $email_old_id)->first();
 
-            $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old);
+            $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old,'etsy_pass' => $etsy->etsy_password_old,'email_id'=> $email_new_id,'etsy_id' => $email_old_id);
             return response()->json($res);
         } catch (\Throwable $th) {
             return 0;
