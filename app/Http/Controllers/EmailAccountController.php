@@ -47,24 +47,41 @@ class EmailAccountController extends Controller
     }
     public function getNewEmailConfirm(Request $request)
     {
-        $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
-            $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
-        })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
-        try {
+
+        $type = $request->type;
+        if ($type == "purchased") {
             $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
                 $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
             })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
+            try {
+                $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
+                    $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
+                })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
 
-            //$data = ChangeEmailAccount::join('etsy_accounts', 'change_email_accounts.email_old_id', '=', 'etsy_accounts.id')->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
-            $email_new_id = $data->email_new_id;
-            $email_old_id = $data->email_old_id;
-            $email = EmailAccount::where('id', $email_new_id)->first();
-            $etsy = EtsyAccount::where('id', $email_old_id)->first();
+                //$data = ChangeEmailAccount::join('etsy_accounts', 'change_email_accounts.email_old_id', '=', 'etsy_accounts.id')->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
+                $email_new_id = $data->email_new_id;
+                $email_old_id = $data->email_old_id;
+                $email = EmailAccount::where('id', $email_new_id)->first();
+                $etsy = EtsyAccount::where('id', $email_old_id)->first();
 
-            $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old,'etsy_pass' => $etsy->etsy_password_old,'email_id'=> $email_new_id,'etsy_id' => $email_old_id);
-            return response()->json($res);
-        } catch (\Throwable $th) {
-            return 0;
+                $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old, 'etsy_pass' => $etsy->etsy_password_old, 'email_id' => $email_new_id, 'etsy_id' => $email_old_id);
+                return response()->json($res);
+            } catch (\Throwable $th) {
+                return 0;
+            }
+        } else {
+            try {
+                $data = ChangeEmailAccount::where('status', 'pending')->first();
+                $email_new_id = $data->email_new_id;
+                $email_old_id = $data->email_old_id;
+                $email = EmailAccount::where('id', $email_new_id)->first();
+                $etsy = EtsyAccount::where('id', $email_old_id)->first();
+
+                $res = array('email' => $email->email, 'password' => $email->password, 'email_old' => $etsy->email_old, 'etsy_pass' => $etsy->etsy_password_old, 'email_id' => $email_new_id, 'etsy_id' => $email_old_id);
+                return response()->json($res);
+            } catch (\Throwable $th) {
+                return 0;
+            }
         }
     }
 
@@ -98,13 +115,17 @@ class EmailAccountController extends Controller
             $status = $request->status;
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;
-            ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  $status]);
-            return 1;
+            $currrentStatus = ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->first()->status;
+            if ($currrentStatus != "done") {
+                ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  $status]);
+                return 1;
+            } else {
+                return "Da update tu truoc";
+            }
         } catch (\Throwable $th) {
             return 0;
         }
     }
-
     public function importEmailAccount(Request $request)
     {;
         //Kiểm tra file
