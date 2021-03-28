@@ -22,19 +22,45 @@ class EmailAccountController extends Controller
     }
     public function getNewEmail(Request $request)
     {
-        $etsy_email = $request->etsy_email;
-        if (!empty($etsy_email)) {
-            $email = EmailAccount::where('status', '1')->first();
-            try {
-                $email->note = $etsy_email;
-                $email->status = 0;
-                $email->save();
-                return response()->json($email);
-            } catch (\Throwable $th) {
-                return 0;
+        $purchased = $request->purchased;
+        $getEmailForType = "purchased"; #purchased and all
+        #{"id":1,"email":"jojobaynton@yahoo.com","email_type":"dasdasd","status":0,"password":"asdasdasdsdasd","email_recover":"","email_recover_password":null,"note":"adsda1sd@gmail.com","email_created_at":null,"created_at":null,"updated_at":"2021-03-28T03:24:01.000000Z"}
+
+        if ($getEmailForType == "purchased") {
+            if ($purchased == "TRUE") {
+                $etsy_email = $request->etsy_email;
+                if (!empty($etsy_email)) {
+                    $email = EmailAccount::where('status', '1')->first();
+                    try {
+                        $email->note = $etsy_email;
+                        $email->status = 0;
+                        $email->save();
+                        return response()->json($email);
+                    } catch (\Throwable $th) {
+                        return "het email";
+                    }
+                } else {
+                    return 0;
+                }
+            } else {
+                $arr = array('id' => 'null', 'email' => 'null', 'email_type' => 'null', 'status' => '0', 'password' => 'null', 'email_recover' => 'null', 'email_recover_password' => 'null', 'note' => 'null', 'email_created_at' => 'null', 'created_at' => 'null', 'updated_at' => 'null');
+                return response()->json($arr);
             }
         } else {
-            return 0;
+            $etsy_email = $request->etsy_email;
+            if (!empty($etsy_email)) {
+                $email = EmailAccount::where('status', '1')->first();
+                try {
+                    $email->note = $etsy_email;
+                    $email->status = 0;
+                    $email->save();
+                    return response()->json($email);
+                } catch (\Throwable $th) {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
         }
     }
 
@@ -87,6 +113,13 @@ class EmailAccountController extends Controller
 
     public function confirmChangedEmail(Request $request)
     {
+        $type = $request->purchase_type;
+        $purchased = $request->purchased;
+
+        if ($type == "purchased" && $purchased == "FAIL") {
+            return "khong cap nhat";
+        }
+
         try {
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;
@@ -116,7 +149,7 @@ class EmailAccountController extends Controller
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;
             $currrentStatus = ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->first()->status;
-            if ($currrentStatus != "done") {
+            if ($currrentStatus == null) {
                 ChangeEmailAccount::where('email_new_id', $email_new_id)->where('email_old_id', $email_old_id)->update(['status'    =>  $status]);
                 return 1;
             } else {
