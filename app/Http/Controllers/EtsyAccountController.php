@@ -17,6 +17,16 @@ class EtsyAccountController extends Controller
     {
         //
     }
+
+    public function resetReview(Request $request)
+    {
+        try {
+            EtsyAccount::where("status", "review")->update(["status" => "pending"]);
+            return "done";
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
     public function putAccount(Request $request)
     {
         #check exists

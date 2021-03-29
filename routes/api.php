@@ -25,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //get new email for change
 Route::post('/put_etsy_account',[EtsyAccountController::class,'putAccount']);
 
+Route::post('/reset_review',[EtsyAccountController::class,'resetReview']);
+
 //get new email for change
 Route::post('/put_email_account',[EmailAccountController::class,'putEmailAccount']);
 //get new email for change
