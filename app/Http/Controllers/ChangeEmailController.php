@@ -19,6 +19,15 @@ class ChangeEmailController extends Controller
     {
         //
     }
+    public function resetReview(Request $request)
+    {
+        try {
+            ChangeEmailAccount::where("status", "review")->update(["status" => "pending"]);
+            return "done";
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
     public function getResult(Request $request)
     {
         $datas = ChangeEmailAccount::get();
