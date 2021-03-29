@@ -35,9 +35,9 @@ class EtsyAccountController extends Controller
                 'country' => $request->country != '<CountryName>' ? $request->country : null,
                 'shop'  => $request->shop_url != '<SHOPNAME>' ? $request->shop_url : null,
                 'shop_url'  => $request->shop_url != '<SHOPNAME>' ? $request->shop_url : null,
-                'facebook'  => $request->facebook,
-                'google'  => $request->google,
-                'twitter'  => $request->twitter,
+                'facebook'  => $request->facebook  != '<FACEBOOK>' ? $request->purchased : FALSE,
+                'google'  => $request->google != '<GOOGLE>' ? $request->purchased : FALSE,
+                'twitter'  => $request->twitter != '<TWITTER>' ? $request->purchased : FALSE,
                 'created_at' => now()
             ]);
             return 1;
