@@ -7,6 +7,7 @@ use App\Models\EtsyAccount;
 use App\Models\ChangeEmailAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PharIo\Manifest\Email;
 
 class EmailAccountController extends Controller
 {
@@ -17,6 +18,82 @@ class EmailAccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
+    {
+        //
+    }
+    public function index()
+    {
+        $emails = EmailAccount::orderBy('id','DESC')->paginate( 10 );
+        $total_email = EmailAccount::all()->count();
+        $email_available =  EmailAccount::where('status','1')->count();
+        return view('dashboard.emailraw.report', [
+            'emails' => $emails,
+            'total_email' => $total_email,
+            'email_available' => $email_available
+            ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @retetsyurn \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
         //
     }
@@ -182,7 +259,8 @@ class EmailAccountController extends Controller
                                 'email_type' => 'Hotmail',
                                 'status' => 1,
                                 'password' => $pass_,
-                                'email_recover' => $recover_
+                                'email_recover' => $recover_,
+                                'created_at' => now()
                             ]);
                             $count++;
                         } catch (\Throwable $th) {

@@ -22,9 +22,16 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/etsy', function () {     return view('dashboard.etsy'); });
         Route::get('/etsy/export', function () {     return view('dashboard.etsy'); });
 
-        Route::get('/email', function () {     return view('dashboard.emailraw'); });
-        Route::get('/email/import', function () {     return view('dashboard.emailraw.import'); });
-        Route::post('/email/import', 'EmailAccountController@importEmailAccount')->name('email-import');
+
+        Route::prefix('emailraw')->group(function(){
+            Route::get('/report', function () {     return view('dashboard.emailraw'); });
+            Route::get('/import', function () {     return view('dashboard.emailraw.import'); });
+            Route::post('/import', 'EmailAccountController@importEmailAccount')->name('email-import');
+        });
+
+        Route::resource('emailraw', 'EmailAccountController');
+
+        Route::resource('crawl', 'EtsyAccountController');
         #end david_dao
         Route::get('/widgets', function () {    return view('dashboard.widgets'); });
         Route::get('/404', function () {        return view('dashboard.404'); });
