@@ -29,6 +29,8 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::post('/import', 'EmailAccountController@importEmailAccount')->name('email-import');
         });
 
+        Route::resource('change', 'ChangeEmailController');
+
         Route::resource('emailraw', 'EmailAccountController');
 
         Route::resource('crawl', 'EtsyAccountController');

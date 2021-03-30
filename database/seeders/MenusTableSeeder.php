@@ -138,23 +138,18 @@ class MenusTableSeeder extends Seeder
         #hoang add
 
         $this->insertTitle('user,admin', 'Manager');
-        $this->beginDropdown('admin', 'Etsy', 'cil-cc');
-            $this->insertLink('admin', 'Report',                   '/etsy');
-            $this->insertLink('admin', 'Export',                   '/etsy/export');
-        $this->endDropdown();
-
         $this->beginDropdown('admin', 'Email', 'cil-envelope-open');
-            $this->insertLink('admin', 'Report',                   '/emailraw/report');
+            $this->insertLink('admin', 'Report',                   '/emailraw');
             $this->insertLink('admin', 'Import',                   '/emailraw/import');
         $this->endDropdown();
 
         $this->beginDropdown('admin', 'Crawl Data', 'cil-envelope-open');
             $this->insertLink('admin', 'Etsy Data',                   '/crawl');
-            $this->insertLink('admin', 'Change Data',                   '/crawl/change_data');
+            $this->insertLink('admin', 'Change Data',                   '/change');
         $this->endDropdown();
+        $this->insertLink('admin', 'Export Accounts', '/export', 'cil-calculator');
 
-        $this->insertTitle('user,admin', 'Extras');
-
+        $this->insertTitle('admin', 'Extras');
         $this->beginDropdown('admin', 'Settings', 'cil-calculator');
             $this->insertLink('admin', 'Notes',                   '/notes');
             $this->insertLink('admin', 'Users',                   '/users');

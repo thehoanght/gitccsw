@@ -1,0 +1,32 @@
+1617098217620	geckodriver	INFO	Listening on 127.0.0.1:52863
+1617098218174	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\DualXeon\\AppData\\Local\\Temp\\rust_mozprofileBS0BVD"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1617098221570	Marionette	INFO	Listening on port 52907
+1617098221812	Marionette	WARN	TLS certificate errors will be ignored for this session
+1617098231173	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://outlook.live.com/mail/0/, line 345: Error: GetFolderChangeDigest failed: Microsoft.Exchange.Data.Storage.QueryInProgressException
+JavaScript error: , line 0: SyntaxError: JSON.parse: unexpected end of data at line 1 column 1 of the JSON data
+1617098278547	Marionette	INFO	Stopped listening on port 52907
+JavaScript error: , line 0: NetworkError: AutoCancel
+1617098294095	geckodriver	INFO	Listening on 127.0.0.1:57274
+1617098294651	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\DualXeon\\AppData\\Local\\Temp\\rust_mozprofilebQn0Te"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1617098297645	Marionette	INFO	Listening on port 57312
+1617098297799	Marionette	WARN	TLS certificate errors will be ignored for this session
+1617098305874	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: , line 0: SyntaxError: JSON.parse: unexpected end of data at line 1 column 1 of the JSON data
+1617098320941	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1617098354105	Marionette	INFO	Stopped listening on port 57312
+1617098357001	geckodriver	INFO	Listening on 127.0.0.1:60821
+1617098357547	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\DualXeon\\AppData\\Local\\Temp\\rust_mozprofileG30qHP"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1617098360888	Marionette	INFO	Listening on port 60857
+1617098361181	Marionette	WARN	TLS certificate errors will be ignored for this session
+1617098378083	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: , line 0: SyntaxError: JSON.parse: unexpected end of data at line 1 column 1 of the JSON data
+1617098399413	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1617098412203	Marionette	INFO	Stopped listening on port 60857
+JavaScript error: , line 0: NetworkError: AutoCancel
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

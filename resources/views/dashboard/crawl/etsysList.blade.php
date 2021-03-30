@@ -23,7 +23,7 @@
                       <div class="text-value-lg">{{$total_pending}}</div>
                       <div>Pending</div>
                       <div class="progress progress-white progress-xs my-2">
-                        <div class="progress-bar" role="progressbar" style="width: {{$total_pending/$total_accounts*100}}%" aria-valuenow="{{$total_pending}}" aria-valuemin="0" aria-valuemax="{{$total_accounts}}"></div>
+                        <div class="progress-bar" role="progressbar" style="width: {{$total_accounts!=0?$total_pending/$total_accounts:0*100}}%" aria-valuenow="{{$total_pending}}" aria-valuemin="0" aria-valuemax="{{$total_accounts}}"></div>
                       </div><small class="text-muted">Etsy status is "null"</small>
                     </div>
                   </div>
@@ -35,7 +35,7 @@
                       <div class="text-value-lg">{{$total_processing}}</div>
                       <div>Processing</div>
                       <div class="progress progress-white progress-xs my-2">
-                        <div class="progress-bar" role="progressbar" style="width: {{$total_processing/$total_accounts*100}}%" aria-valuenow="{{$total_processing}}" aria-valuemin="0" aria-valuemax="{{$total_accounts}}"></div>
+                        <div class="progress-bar" role="progressbar" style="width: {{$total_accounts!=0?$total_processing/$total_accounts:0*100}}%" aria-valuenow="{{$total_processing}}" aria-valuemin="0" aria-valuemax="{{$total_accounts}}"></div>
                       </div><small class="text-muted">{{$total_confirm}} send email, {{$total_unconfirm}} don't send.</small>
                     </div>
                   </div>
@@ -47,7 +47,7 @@
                       <div class="text-value-lg">{{$total_purchased}}</div>
                       <div>Purchased</div>
                       <div class="progress progress-white progress-xs my-2">
-                        <div class="progress-bar" role="progressbar" style="width: {{$total_purchased_done/$total_purchased*100}}%" aria-valuenow="{{$total_purchased_done}}" aria-valuemin="0" aria-valuemax="{{$total_purchased}}"></div>
+                        <div class="progress-bar" role="progressbar" style="width: {{$total_accounts!=0?$total_pending/$total_accounts:0*100}}%" aria-valuenow="{{$total_purchased_done}}" aria-valuemin="0" aria-valuemax="{{$total_purchased}}"></div>
                       </div><small class="text-muted">Confirm: {{$total_purchased_done}}/Unconfirm: {{$total_purchased - $total_purchased_done}}</small>
                     </div>
                   </div>

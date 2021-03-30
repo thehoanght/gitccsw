@@ -102,6 +102,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                            {{ $emails->links() }}
                         </div>
                     </div>
                 </div>
