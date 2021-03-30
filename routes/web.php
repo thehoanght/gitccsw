@@ -29,6 +29,8 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::post('/import', 'EmailAccountController@importEmailAccount')->name('email-import');
         });
 
+        //download
+        Route::get('/change/download', 'ChangeEmailController@download');
         Route::resource('change', 'ChangeEmailController');
 
         Route::resource('emailraw', 'EmailAccountController');

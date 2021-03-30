@@ -190,13 +190,6 @@ class EmailAccountController extends Controller
 
     public function confirmChangedEmail(Request $request)
     {
-        $type = $request->purchase_type;
-        $purchased = $request->purchased;
-
-        if ($type == "purchased" && $purchased == "FAIL") {
-            return "khong cap nhat";
-        }
-
         try {
             $email_old_id = EtsyAccount::where('email_old', $request->email_old)->first()->id;
             $email_new_id = EmailAccount::where('email', $request->email_new)->first()->id;

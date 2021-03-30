@@ -25,8 +25,8 @@ class ChangeEmailController extends Controller
     {
         $datas = ChangeEmailAccount::orderBy('id', 'DESC')->paginate(10);
         $total_change = ChangeEmailAccount::all()->count();
-        $total_done =  ChangeEmailAccount::where('status','done')->count();
-        $total_pending = ChangeEmailAccount::where('status','pending')->count();
+        $total_done =  ChangeEmailAccount::where('status', 'done')->count();
+        $total_pending = ChangeEmailAccount::where('status', 'pending')->count();
         $total_fail = $total_change - $total_done - $total_pending;
         return view('dashboard.change.changeList', [
             'datas' => $datas,
@@ -80,7 +80,26 @@ class ChangeEmailController extends Controller
         $data = ChangeEmailAccount::find($id);
         return view('dashboard.change.edit', ['data' => $data]);
     }
+    public function download()
+    {
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',   'Content-type'        => 'text/csv',   'Content-Disposition' => 'attachment; filename=galleries.csv',   'Expires'             => '0',   'Pragma'              => 'public'
+        ];
 
+        $list = ChangeEmailAccount::all()->toArray();
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            foreach ($list as $row) {
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
     /**
      * Update the specified resource in storage.
      *

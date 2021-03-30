@@ -18,6 +18,7 @@ class CreateSellingManagerTable extends Migration
             $table->string('user_id');
             $table->string('change_account_id');
             $table->string('status');
+            $table->string('url_file');
             $table->string('note');
             $table->timestamps();
         });
