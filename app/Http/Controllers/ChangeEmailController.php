@@ -92,6 +92,8 @@ class ChangeEmailController extends Controller
         foreach ($list as $data) {
             $list[$i]['email_new_id'] = EmailAccount::find($data['email_new_id'])->email;
             $list[$i]['email_old_id'] = EtsyAccount::find($data['email_old_id'])->email_old;
+            $list[$i]['created_at'] = EtsyAccount::find($data['email_old_id'])->purchased;
+            $list[$i]['updated_at'] = EtsyAccount::find($data['email_old_id'])->password;
             $i++;
         }
 
