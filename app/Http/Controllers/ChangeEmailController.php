@@ -84,25 +84,51 @@ class ChangeEmailController extends Controller
     {
         $time = now();
         $headers = [
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',   'Content-type'        => 'text/csv',   'Content-Disposition' => 'attachment; filename='.'data-'.$time.'.csv',   'Expires'             => '0',   'Pragma'              => 'public'
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',   'Content-type'        => 'text/csv',   'Content-Disposition' => 'attachment; filename=' . 'data-' . $time . '.csv',   'Expires'             => '0',   'Pragma'              => 'public'
         ];
 
-        $list = ChangeEmailAccount::all()->toArray();
-        $i = 0;
+        $list = ChangeEmailAccount::all();
+
+        $datas = array();
+        $j = 0;
         foreach ($list as $data) {
-            $list[$i]['email_new_id'] = EmailAccount::find($data['email_new_id'])->email;
-            $list[$i]['email_old_id'] = EtsyAccount::find($data['email_old_id'])->email_old;
-            $list[$i]['created_at'] = EtsyAccount::find($data['email_old_id'])->purchased;
-            $list[$i]['updated_at'] = EtsyAccount::find($data['email_old_id'])->password;
-            $i++;
+            $datas[] = ([
+                'STT' => $j + 1,
+                'Email' => EmailAccount::find($data['email_new_id'])->email,
+                'Password' => EmailAccount::find($data['email_new_id'])->password,
+                'EmailBackup' => EmailAccount::find($data['email_new_id'])->email_recover,
+                'PassEmailBackup' => EmailAccount::find($data['email_new_id'])->email_recover_password,
+                'EtsyEmail' => EtsyAccount::find($data['email_old_id'])->email_old,
+                'EtsyPass' => EtsyAccount::find($data['email_old_id'])->etsy_password_old,
+                'GEO' => EtsyAccount::find($data['email_old_id'])->country,
+                'Status' => $data['status'],
+                'Purchased' => EtsyAccount::find($data['email_old_id'])->purchased,
+                'PurchasedAt' => EtsyAccount::find($data['email_old_id'])->purchased_at,
+                'CreditCard' => EtsyAccount::find($data['email_old_id'])->credit_card,
+                'DateCreated' => EtsyAccount::find($data['email_old_id'])->date_created_account,
+                'Zipcode' => EtsyAccount::find($data['email_old_id'])->address,
+                'Shop' => EtsyAccount::find($data['email_old_id'])->shop,
+                'GG/FB/TW' => EtsyAccount::find($data['email_old_id'])->google . '/' . EtsyAccount::find($data['email_old_id'])->facebook . '/' . EtsyAccount::find($data['email_old_id'])->twitter,
+            ]);
+            $j++;
         }
 
-        # add headers for each column in the CSV download
-        array_unshift($list, array_keys($list[0]));
 
-        $callback = function () use ($list) {
+        // $i = 0;
+        // foreach ($list as $data) {
+        //     $list[$i]['email_new_id'] = EmailAccount::find($data['email_new_id'])->email;
+        //     $list[$i]['email_old_id'] = EtsyAccount::find($data['email_old_id'])->email_old;
+        //     $list[$i]['created_at'] = EtsyAccount::find($data['email_old_id'])->purchased;
+        //     $list[$i]['updated_at'] = EtsyAccount::find($data['email_old_id'])->password;
+        //     $i++;
+        // }
+
+        # add headers for each column in the CSV download
+        array_unshift($datas, array_keys($datas[0]));
+
+        $callback = function () use ($datas) {
             $FH = fopen('php://output', 'w');
-            foreach ($list as $row) {
+            foreach ($datas as $row) {
                 fputcsv($FH, $row);
             }
             fclose($FH);
