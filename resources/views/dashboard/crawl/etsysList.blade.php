@@ -76,6 +76,7 @@
                                         <th>Zipcode</th>
                                         <th>Purchase</th>
                                         <th>GEO</th>
+                                        <th>Shop</th>
                                         <th>FB</th>
                                         <th>Google</th>
                                         <th>Twitter</th>
@@ -132,6 +133,13 @@
                                                 @endif
                                             </td>
                                             <td>{{ $etsy->country }}</td>
+                                            <td class="text-center">
+                                                @if ($etsy->shop != 'TRUE')
+                                                    <span class="badge badge-secondary">FALSE</span>
+                                                @else
+                                                    <span class="badge badge-warning">TRUE</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 @if ($etsy->facebook != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
