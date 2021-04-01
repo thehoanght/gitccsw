@@ -103,7 +103,13 @@
                                                     <span class="badge badge-success">TRUE</span>
                                                 @endif
                                             </td>
-
+                                            <td class="text-center">
+                                                @if (DB::table('etsy_accounts')->find($data->email_old_id)->shop != 'TRUE')
+                                                    <span class="badge badge-secondary"><a href="https://etsy.com/shop/{{DB::table('etsy_accounts')->find($data->email_old_id)->shop}}">{{DB::table('etsy_accounts')->find($data->email_old_id)->shop}}</a></span>
+                                                @else
+                                                    <span class="badge badge-success"><a href="https://etsy.com/shop/{{DB::table('etsy_accounts')->find($data->email_old_id)->shop}}">{{DB::table('etsy_accounts')->find($data->email_old_id)->shop}}</a></span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if (DB::table('etsy_accounts')->find($data->email_old_id)->facebook != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
