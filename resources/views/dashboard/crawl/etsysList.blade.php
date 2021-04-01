@@ -135,9 +135,9 @@
                                             <td>{{ $etsy->country }}</td>
                                             <td class="text-center">
                                                 @if ($etsy->shop != 'TRUE')
-                                                    <span class="badge badge-secondary">FALSE</span>
+                                                    <span class="badge badge-secondary"><a href="https://etsy.com/shop/{{$etsy->shop}}">{{$etsy->shop}}</a></span>
                                                 @else
-                                                    <span class="badge badge-warning">TRUE</span>
+                                                    <span class="badge badge-success"><a href="https://etsy.com/shop/{{$etsy->shop}}">{{$etsy->shop}}</a></span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
