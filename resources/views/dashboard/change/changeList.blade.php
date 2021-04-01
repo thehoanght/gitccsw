@@ -72,6 +72,7 @@
                                         <th>Email_Old</th>
                                         <th>Email_New</th>
                                         <th>Purchased</th>
+                                        <th>FB/GG/TW</th>
                                         <th>ChangeAt</th>
                                         <th>ConfirmAt</th>
                                     </tr>
@@ -102,8 +103,25 @@
                                                     <span class="badge badge-success">TRUE</span>
                                                 @endif
                                             </td>
+
+                                            <td>
+                                                @if (DB::table('etsy_accounts')->find($data->email_old_id)->facebook != 'TRUE')
+                                                    <span class="badge badge-secondary">FALSE</span>
+                                                @else
+                                                    <span class="badge badge-success">TRUE</span>
+                                                @endif
+                                                @if (DB::table('etsy_accounts')->find($data->email_old_id)->google != 'TRUE')
+                                                    <span class="badge badge-secondary">FALSE</span>
+                                                @else
+                                                    <span class="badge badge-success">TRUE</span>
+                                                @endif
+                                                @if (DB::table('etsy_accounts')->find($data->email_old_id)->twitter != 'TRUE')
+                                                    <span class="badge badge-secondary">FALSE</span>
+                                                @else
+                                                    <span class="badge badge-success">TRUE</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $data->change_email_at }}</td>
-                                            <td>{{ $data->address }}</td>
                                             <td>{{ $data->updated_at }}</td>
                                         </tr>
                                     @endforeach
