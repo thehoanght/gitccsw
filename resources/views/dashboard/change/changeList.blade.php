@@ -108,17 +108,17 @@
                                                 @if (DB::table('etsy_accounts')->find($data->email_old_id)->facebook != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
                                                 @else
-                                                    <span class="badge badge-success">TRUE</span>
+                                                    <span class="badge badge-warning">TRUE</span>
                                                 @endif
                                                 @if (DB::table('etsy_accounts')->find($data->email_old_id)->google != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
                                                 @else
-                                                    <span class="badge badge-success">TRUE</span>
+                                                    <span class="badge badge-warning">TRUE</span>
                                                 @endif
                                                 @if (DB::table('etsy_accounts')->find($data->email_old_id)->twitter != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
                                                 @else
-                                                    <span class="badge badge-success">TRUE</span>
+                                                    <span class="badge badge-warning">TRUE</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->change_email_at }}</td>
