@@ -72,6 +72,7 @@
                                         <th>Email_Old</th>
                                         <th>Email_New</th>
                                         <th>Purchased</th>
+                                        <th>Shop</th>
                                         <th>FB/GG/TW</th>
                                         <th>ChangeAt</th>
                                         <th>ConfirmAt</th>
