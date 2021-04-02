@@ -21,14 +21,12 @@ class SellingManagerController extends Controller
     public function importSellingData(Request $request)
     {
         //Kiểm tra file
-        if ($request->hasFile('emailfile')) {
-            $file = $request->emailfile;
-            //  \r\n
-            $array = preg_split('/[\n\r]+/', $file->get());
+        if ($request->emaillist != "") {
+            $array = preg_split('/[\n\r]+/', $request->emaillist);
             $count = 0;
             $fail = "";
             foreach ($array as $accinfo) {
-                $accinfo = trim($accinfo," ");
+                $accinfo = trim($accinfo, " ");
                 $i = SellingManager::where('email', $accinfo)->count();
                 if ($i < 1) {
                     try {
@@ -58,12 +56,57 @@ class SellingManagerController extends Controller
                         ]);
                         $count++;
                     }
-                } else{
-                    $fail .= "Exists: ".$accinfo." ";
+                } else {
+                    $fail .= "Exists: " . $accinfo . " ";
                 }
             }
             return back()
-                ->with('success', 'Uploaded ' . $count . ' email đã bán. '.$fail);
+                ->with('success', 'Uploaded ' . $count . ' email đã bán. ' . $fail);
+        }
+
+        if ($request->hasFile('emailfile')) {
+            $file = $request->emailfile;
+            //  \r\n
+            $array = preg_split('/[\n\r]+/', $file->get());
+            $count = 0;
+            $fail = "";
+            foreach ($array as $accinfo) {
+                $accinfo = trim($accinfo, " ");
+                $i = SellingManager::where('email', $accinfo)->count();
+                if ($i < 1) {
+                    try {
+                        // $acc = explode(',', $accinfo);
+                        $email_ = $accinfo;
+                        $email_id = DB::table('email_accounts')->where('email', $email_)->first()->id;
+                        $change_account_id = DB::table('change_email_accounts')->where('email_new_id ', $email_id)->first()->id;
+                        $userId = Auth::id();
+                        SellingManager::insert([
+                            'user_id' => $userId,
+                            'change_account_id' => $change_account_id,
+                            'email' => $email_,
+                            'order_id' => '',
+                            'status' => 1,
+                            'created_at' => now()
+                        ]);
+                        $count++;
+                    } catch (\Throwable $th) {
+                        $email_ = $accinfo;
+                        $userId = Auth::id();
+                        SellingManager::insert([
+                            'user_id' => $userId,
+                            'change_account_id' => '',
+                            'email' => $email_,
+                            'status' => 1,
+                            'created_at' => now()
+                        ]);
+                        $count++;
+                    }
+                } else {
+                    $fail .= "Exists: " . $accinfo . " ";
+                }
+            }
+            return back()
+                ->with('success', 'Uploaded ' . $count . ' email đã bán. ' . $fail);
         } else {
             return back()
                 ->with('error', 'You have error when upload.');
