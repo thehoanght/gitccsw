@@ -28,6 +28,7 @@ class SellingManagerController extends Controller
             $count = 0;
             $fail = "";
             foreach ($array as $accinfo) {
+                $accinfo = trim($accinfo," ");
                 $i = SellingManager::where('email', $accinfo)->count();
                 if ($i < 1) {
                     try {
