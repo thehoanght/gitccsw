@@ -16,10 +16,11 @@ class CreateSellingManagerTable extends Migration
         Schema::create('selling_manager', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('change_account_id');
-            $table->string('status');
-            $table->string('url_file');
-            $table->string('note');
+            $table->string('email');
+            $table->string('change_account_id')->nullable();;
+            $table->string('order_id')->nullable();;
+            $table->string('status')->nullable();;
+            $table->string('note')->nullable();;
             $table->timestamps();
         });
     }

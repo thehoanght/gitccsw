@@ -230,7 +230,7 @@ class EmailAccountController extends Controller
         }
     }
     public function importEmailAccount(Request $request)
-    {;
+    {
         //Kiểm tra file
         if ($request->hasFile('emailfile')) {
             $file = $request->emailfile;

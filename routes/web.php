@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\SellingManagerController;
+
 Route::group(['middleware' => ['get.menu']], function () {
     Route::get('/', function () {           return view('dashboard.homepage'); });
 
@@ -36,6 +38,14 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('emailraw', 'EmailAccountController');
 
         Route::resource('crawl', 'EtsyAccountController');
+
+
+        Route::prefix('selling')->group(function(){
+            Route::get('/import', [SellingManagerController::class, 'importEmail']);
+            Route::post('/import', 'SellingManagerController@importSellingData')->name('selling-import');
+        });
+        Route::resource('selling', 'SellingManagerController');
+
         #end david_dao
         Route::get('/widgets', function () {    return view('dashboard.widgets'); });
         Route::get('/404', function () {        return view('dashboard.404'); });

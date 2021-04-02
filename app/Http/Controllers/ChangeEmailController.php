@@ -7,7 +7,7 @@ use App\Models\EtsyAccount;
 use App\Models\ChangeEmailAccount;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Models\SellingManager;
 class ChangeEmailController extends Controller
 {
     /**
@@ -92,16 +92,19 @@ class ChangeEmailController extends Controller
         $datas = array();
         $j = 0;
         foreach ($list as $data) {
+
+            $email = EmailAccount::find($data['email_new_id'])->email;
+            $selling = SellingManager::where("email",$email)->count();
             $datas[] = ([
                 'STT' => $j + 1,
-                'Email' => EmailAccount::find($data['email_new_id'])->email,
+                'Email' => $email,
                 'Password' => EmailAccount::find($data['email_new_id'])->password,
                 'EmailBackup' => EmailAccount::find($data['email_new_id'])->email_recover,
                 'PassEmailBackup' => EmailAccount::find($data['email_new_id'])->email_recover_password,
                 'EtsyEmail' => EtsyAccount::find($data['email_old_id'])->email_old,
                 'EtsyPass' => EtsyAccount::find($data['email_old_id'])->etsy_password_old,
                 'GEO' => EtsyAccount::find($data['email_old_id'])->country,
-                'Status' => $data['status'],
+                'Status' => $selling == 0?$data['status']:'sold',
                 'Purchased' => EtsyAccount::find($data['email_old_id'])->purchased,
                 'PurchasedAt' => EtsyAccount::find($data['email_old_id'])->purchased_at,
                 'CreditCard' => EtsyAccount::find($data['email_old_id'])->credit_card,
