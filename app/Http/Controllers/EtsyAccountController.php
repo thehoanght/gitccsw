@@ -27,7 +27,7 @@ class EtsyAccountController extends Controller
         $total_unconfirm = EtsyAccount::where('status', '1')->count();
         $total_purchased = EtsyAccount::where('purchased', 'TRUE')->count();
         $total_purchased_done = EtsyAccount::where('status', '0')->where('purchased','TRUE')->count();
-        $etsys = EtsyAccount::orderBy('id', 'DESC')->paginate(10);
+        $etsys = EtsyAccount::orderBy('id', 'DESC')->paginate(100);
         return view('dashboard.crawl.etsysList', [
             'etsys' => $etsys,
             'total_accounts' => $total_accounts,
