@@ -179,9 +179,20 @@ class ChangeEmailController extends Controller
 
     public function resetReview(Request $request)
     {
+        
+
         try {
-            ChangeEmailAccount::where("status", "review")->update(["status" => "pending"]);
-            return "done";
+            $change = ChangeEmailAccount::where("status", "review")->first();
+            $updated_at = $change->updated_at;
+
+            $currentDate = strtotime(now());
+            if (floor(ads($currentDate - strtotime($updated_at)))/86400<=2) {
+                return floor(ads($currentDate - strtotime($updated_at)))/86400;
+            }else{
+                return "asdasd". floor(ads($currentDate - strtotime($updated_at)))/86400;
+            }
+            //->update(["status" => "pending"]);
+            //return "done";
         } catch (\Throwable $th) {
             return 0;
         }
