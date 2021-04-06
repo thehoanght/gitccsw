@@ -92,7 +92,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         });
         Route::resource('notes', 'NotesController');
     });
-    Auth::routes();
+    Auth::routes(['register' => false]);
 
     Route::resource('resource/{table}/resource', 'ResourceController')->names([
         'index'     => 'resource.index',
