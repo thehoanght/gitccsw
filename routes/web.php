@@ -16,6 +16,7 @@ use App\Http\Middleware\Authenticate;
 
 Route::group(['middleware' => ['get.menu']], function () {    
 
+    Route::get('/', function () {           return view('welcome'); });
     Route::group(['middleware' => ['role:user']], function () {
         Route::get('/', function () {           return view('dashboard.homepage'); });
         Route::get('/colors', function () {     return view('dashboard.colors'); });
