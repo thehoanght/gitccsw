@@ -189,6 +189,7 @@ class ChangeEmailController extends Controller
                 $change->status = "pending";
                 $change->save();
             }
+            return "done";
             //->update(["status" => "pending"]);
             //return "done";
         } catch (\Throwable $th) {
