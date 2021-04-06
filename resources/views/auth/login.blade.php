@@ -48,10 +48,7 @@
                 <div>
                   <h2>Sign up</h2>
                   <p>Chức năng đăng ký đã tạm khóa, đợi Tết Congo chúng tôi sẽ mở.</p>
-                  <!-- @if (Route::has('password.request'))
-                    <a href="{{ route('register') }}" class="btn btn-primary active mt-3">{{ __('Register') }}</a>
-                    <a href="#" class="btn btn-primary active mt-3">Register</a>
-                  @endif -->
+                  
                 </div>
               </div>
             </div>
