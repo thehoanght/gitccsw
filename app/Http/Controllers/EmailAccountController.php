@@ -197,7 +197,8 @@ class EmailAccountController extends Controller
                 'email_new_id'      =>  $email_new_id,
                 'email_old_id'      =>  $email_old_id,
                 'change_email_at'   =>  now(),
-                'status'            =>  'pending'
+                'status'            =>  'pending',
+                'created_at'            =>  now()
             ]);
 
             EmailAccount::where('email', $request->email_new)
