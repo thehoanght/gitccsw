@@ -8,6 +8,7 @@ use App\Models\ChangeEmailAccount;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\SellingManager;
+
 class ChangeEmailController extends Controller
 {
     /**
@@ -92,9 +93,8 @@ class ChangeEmailController extends Controller
         $datas = array();
         $j = 0;
         foreach ($list as $data) {
-
             $email = EmailAccount::find($data['email_new_id'])->email;
-            $selling = SellingManager::where("email",$email)->count();
+            $selling = SellingManager::where("email", $email)->count();
             $datas[] = ([
                 'STT' => $j + 1,
                 'Email' => $email,
@@ -104,7 +104,7 @@ class ChangeEmailController extends Controller
                 'EtsyEmail' => EtsyAccount::find($data['email_old_id'])->email_old,
                 'EtsyPass' => EtsyAccount::find($data['email_old_id'])->etsy_password_old,
                 'GEO' => EtsyAccount::find($data['email_old_id'])->country,
-                'Status' => $selling == 0?$data['status']:'sold',
+                'Status' => $selling == 0 ? $data['status'] : 'sold',
                 'Purchased' => EtsyAccount::find($data['email_old_id'])->purchased,
                 'PurchasedAt' => EtsyAccount::find($data['email_old_id'])->purchased_at,
                 'CreditCard' => EtsyAccount::find($data['email_old_id'])->credit_card,
@@ -184,7 +184,7 @@ class ChangeEmailController extends Controller
             $updated_at = $change->updated_at;
             $currentDate = strtotime(now());
             $convertUpdatedAt = strtotime($updated_at);
-            if (floor(abs($currentDate - $convertUpdatedAt)/86400)<=2) {
+            if (floor(abs($currentDate - $convertUpdatedAt) / 86400) <= 2) {
                 $change->updated_at = now();
                 $change->status = "pending";
                 $change->save();
