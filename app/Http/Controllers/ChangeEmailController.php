@@ -187,7 +187,7 @@ class ChangeEmailController extends Controller
 
             $currentDate = strtotime(now());
             $convertUpdatedAt = strtotime($updated_at);
-            return floor(abs($currentDate - $convertUpdatedAt)/86400);
+            return abs($currentDate - $convertUpdatedAt)/86400;
             if (floor(abs($currentDate - $convertUpdatedAt)/86400)<=2) {
                 return floor(abs($currentDate - $convertUpdatedAt)/86400);
             }else{
