@@ -101,7 +101,7 @@ class EmailAccountController extends Controller
 
         $country = $request->country;
 
-        if ($country != "United Kingdom" || $country != "United States" || $country != "Canada" || $country != "Australia" || $country != "Singapore") {
+        if ($country != "United Kingdom" && $country != "United States" && $country != "Canada" && $country != "Australia" && $country != "Singapore") {
             $arr = array('id' => 'null', 'email' => 'null', 'email_type' => 'null', 'status' => '0', 'password' => 'null', 'email_recover' => 'null', 'email_recover_password' => 'null', 'note' => 'null', 'email_created_at' => 'null', 'created_at' => 'null', 'updated_at' => 'null');
             return response()->json($arr);
         }
