@@ -23,14 +23,14 @@ class EmailAccountController extends Controller
     }
     public function index()
     {
-        $emails = EmailAccount::orderBy('id','DESC')->paginate( 10 );
+        $emails = EmailAccount::orderBy('id', 'DESC')->paginate(10);
         $total_email = EmailAccount::all()->count();
-        $email_available =  EmailAccount::where('status','1')->count();
+        $email_available =  EmailAccount::where('status', '1')->count();
         return view('dashboard.emailraw.report', [
             'emails' => $emails,
             'total_email' => $total_email,
             'email_available' => $email_available
-            ]);
+        ]);
     }
 
     /**
@@ -84,7 +84,6 @@ class EmailAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
@@ -99,6 +98,14 @@ class EmailAccountController extends Controller
     }
     public function getNewEmail(Request $request)
     {
+
+        $country = $request->country;
+
+        if ($country != "United Kingdom" || $country != "United States" || $country != "Canada" || $country != "Australia" || $country != "Singapore") {
+            $arr = array('id' => 'null', 'email' => 'null', 'email_type' => 'null', 'status' => '0', 'password' => 'null', 'email_recover' => 'null', 'email_recover_password' => 'null', 'note' => 'null', 'email_created_at' => 'null', 'created_at' => 'null', 'updated_at' => 'null');
+            return response()->json($arr);
+        }
+
         $purchased = $request->purchased;
         $getEmailForType = "purchased"; #purchased and all
         #{"id":1,"email":"jojobaynton@yahoo.com","email_type":"dasdasd","status":0,"password":"asdasdasdsdasd","email_recover":"","email_recover_password":null,"note":"adsda1sd@gmail.com","email_created_at":null,"created_at":null,"updated_at":"2021-03-28T03:24:01.000000Z"}
