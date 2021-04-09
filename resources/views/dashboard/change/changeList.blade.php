@@ -96,7 +96,7 @@
                                                 @endif
                                             </td>
                                             <td><a href="{{ url('/crawl/' . $data->email_old_id ) }}">{{ strtolower(DB::table('etsy_accounts')->find($data->email_old_id)->email_old)}}</a></td>
-                                            <td>{{ DB::table('email_accounts')->find($data->email_new_id)->email  }}</td>
+                                            <td>{{ DB::table('email_accounts')->find($data->email_new_id)->email }}:{{ DB::table('email_accounts')->find($data->email_new_id)->password  }}</td>
                                             <td class="text-center">
                                                 @if (DB::table('etsy_accounts')->find($data->email_old_id)->purchased != 'TRUE')
                                                     <span class="badge badge-secondary">FALSE</span>
