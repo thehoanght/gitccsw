@@ -33,8 +33,11 @@ Route::post('/put_email_account',[EmailAccountController::class,'putEmailAccount
 Route::post('/get_new_email',[EmailAccountController::class,'getNewEmail']);
 //get new email for change
 Route::get('/get_new_email_confirm',[EmailAccountController::class,'getNewEmailConfirm']);
+
 //confirm change email when send request change email on etsy
 Route::post('/confirm_changed_email',[EmailAccountController::class,'confirmChangedEmail']);
+Route::post('/confirm_changed_password',[EmailAccountController::class,'confirmChangedPassword']); 
+
 //confirm change email when click confirm change email on Mailbox
 Route::post('/confirm_changed_email_complete',[EmailAccountController::class,'confirmChangedEmailComplete']);
 

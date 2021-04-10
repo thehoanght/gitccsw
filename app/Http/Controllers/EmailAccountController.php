@@ -195,6 +195,15 @@ class EmailAccountController extends Controller
         }
     }
 
+    public function confirmChangedPassword(Request $request)
+    {
+        try {
+            EtsyAccount::where('email_old', $request->email_old)->update(['etsy_password_old' => $request->pass_email_new]);
+            return 1;
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
     public function confirmChangedEmail(Request $request)
     {
         try {
