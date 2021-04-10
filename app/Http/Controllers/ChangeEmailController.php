@@ -29,12 +29,16 @@ class ChangeEmailController extends Controller
         $total_done =  ChangeEmailAccount::where('status', 'done')->count();
         $total_pending = ChangeEmailAccount::where('status', 'pending')->count();
         $total_fail = $total_change - $total_done - $total_pending;
+        $total_sold = SellingManager::all()->count();
+        
         return view('dashboard.change.changeList', [
             'datas' => $datas,
             'total_change' => $total_change,
             'total_done' => $total_done,
             'total_pending' => $total_pending,
-            'total_fail' => $total_fail
+            'total_fail' => $total_fail,
+            'total_sold' => $total_sold
+
         ]);
     }
 
