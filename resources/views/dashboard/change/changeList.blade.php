@@ -21,7 +21,7 @@
                   <div class="card text-white bg-success">
                     <div class="card-body">
                       <div class="text-value-lg">{{$total_done}}</div>
-                      <div>Done</div>
+                      <div>Done - {$total_sold} Sold</div>
                       <div class="progress progress-white progress-xs my-2">
                         <div class="progress-bar" role="progressbar" style="width: {{$total_change != 0?$total_done/$total_change*100:0}}%" aria-valuenow="{{$total_done}}" aria-valuemin="0" aria-valuemax="{{$total_change}}"></div>
                       </div><small class="text-muted">Change status is "done"</small>
