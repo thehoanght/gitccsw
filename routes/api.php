@@ -36,6 +36,7 @@ Route::get('/get_new_email_confirm',[EmailAccountController::class,'getNewEmailC
 
 //confirm change email when send request change email on etsy
 Route::post('/confirm_changed_email',[EmailAccountController::class,'confirmChangedEmail']);
+Route::get('/confirm_changed_email',[EmailAccountController::class,'confirmChangedEmail']);
 Route::post('/confirm_changed_password',[EmailAccountController::class,'confirmChangedPassword']); 
 
 //confirm change email when click confirm change email on Mailbox
