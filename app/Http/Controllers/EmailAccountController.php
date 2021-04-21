@@ -182,7 +182,7 @@ class EmailAccountController extends Controller
             try {
                 $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
                     $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
-                })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->orderBy('etsy_accounts.id','DESC')->first();
+                })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->orderBy('change_email_accounts.id','DESC')->first();
 
                 //$data = ChangeEmailAccount::join('etsy_accounts', 'change_email_accounts.email_old_id', '=', 'etsy_accounts.id')->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
                 $email_new_id = $data->email_new_id;
