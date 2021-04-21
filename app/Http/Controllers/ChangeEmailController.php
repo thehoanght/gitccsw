@@ -186,6 +186,9 @@ class ChangeEmailController extends Controller
         ChangeEmailAccount::where('status','pending')->update([
             'status' => 'custom'
         ]);
+        ChangeEmailAccount::where('status','review')->update([
+            'status' => 'custom'
+        ]);
         // try {
         //     $change = ChangeEmailAccount::where("status", "review")->first();
         //     $updated_at = $change->updated_at;
