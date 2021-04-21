@@ -107,7 +107,7 @@ class EmailAccountController extends Controller
             return response()->json($arr);
         }
 
-        
+
 
         $purchased = $request->purchased;
         $getEmailForType = "purchased"; #purchased and all
@@ -116,7 +116,7 @@ class EmailAccountController extends Controller
         if ($getEmailForType == "purchased") {
             if ($purchased == "TRUE") {
                 $etsy_email = $request->etsy_email;
-                
+
                 if (!empty($etsy_email)) {
 
                     if ($request->email_type == "gmail") {
@@ -179,13 +179,10 @@ class EmailAccountController extends Controller
 
         $type = $request->type;
         if ($type == "purchased") {
-            $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
-                $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
-            })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
             try {
                 $data = ChangeEmailAccount::join('etsy_accounts', function ($join) {
                     $join->on('change_email_accounts.email_old_id', 'etsy_accounts.id');
-                })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
+                })->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->orderBy('etsy_accounts.id','DESC')->first();
 
                 //$data = ChangeEmailAccount::join('etsy_accounts', 'change_email_accounts.email_old_id', '=', 'etsy_accounts.id')->where('etsy_accounts.purchased', 'TRUE')->where('change_email_accounts.status', 'pending')->first();
                 $email_new_id = $data->email_new_id;
