@@ -183,22 +183,25 @@ class ChangeEmailController extends Controller
 
     public function resetReview(Request $request)
     {
-        try {
-            $change = ChangeEmailAccount::where("status", "review")->first();
-            $updated_at = $change->updated_at;
-            $currentDate = strtotime(now());
-            $convertUpdatedAt = strtotime($updated_at);
-            if (floor(abs($currentDate - $convertUpdatedAt) / 86400) <= 2) {
-                $change->updated_at = now();
-                $change->status = "pending";
-                $change->save();
-            }
-            return "done";
-            //->update(["status" => "pending"]);
-            //return "done";
-        } catch (\Throwable $th) {
-            return 0;
-        }
+        ChangeEmailAccount::where('status','pending')->update([
+            'status' => 'custom'
+        ]);
+        // try {
+        //     $change = ChangeEmailAccount::where("status", "review")->first();
+        //     $updated_at = $change->updated_at;
+        //     $currentDate = strtotime(now());
+        //     $convertUpdatedAt = strtotime($updated_at);
+        //     if (floor(abs($currentDate - $convertUpdatedAt) / 86400) <= 2) {
+        //         $change->updated_at = now();
+        //         $change->status = "pending";
+        //         $change->save();
+        //     }
+        //     return "done";
+        //     //->update(["status" => "pending"]);
+        //     //return "done";
+        // } catch (\Throwable $th) {
+        //     return 0;
+        // }
     }
     public function getResult(Request $request)
     {
